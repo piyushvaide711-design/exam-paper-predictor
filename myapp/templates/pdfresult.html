@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .info-table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+    }
+
+    .info-table td {
+        padding: 6px 4px;
+    }
+
+    .question-block {
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #cccccc;
+    }
+
+    .question-title {
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .detail-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 6px;
+    }
+
+    .detail-table td {
+        padding: 4px 0;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Predicted Question Paper</h2>
+</div>
+
+<table class="info-table">
+    <tr>
+        <td><span class="label">Subject:</span> {{ subject }}</td>
+        <td><span class="label">Semester:</span> {{ semester }}</td>
+        <td><span class="label">College:</span> {{ college }}</td>
+    </tr>
+</table>
+
+<hr>
+
+{% for q in predictions %}
+<div class="question-block">
+
+    <div class="question-title">
+        {{ forloop.counter }}. {{ q.question_text }}
+    </div>
+
+    <table class="detail-table">
+        <tr>
+            <td><span class="label">Repeated:</span> {{ q.repeat_count }} times</td>
+        </tr>
+        <tr>
+            <td><span class="label">Modules:</span> {{ q.modules_found|join:", " }}</td>
+        </tr>
+        <tr>
+            <td><span class="label">Marks:</span> {{ q.marks_found|join:", " }}</td>
+        </tr>
+    </table>
+
+</div>
+{% endfor %}
+
+</body>
+</html>
+

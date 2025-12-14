@@ -1,0 +1,81 @@
+Module,Question_Number,Question,Marks
+Unit-I,A,Differentiate between Compiler and Preprocessor,4
+Unit-I,B,Explain in brief different phases of the compiler. Explain how the following statement is processed by different phases. Sum = Sum * 10 + digit,8
+Unit-I,C,Find the minimum state DFA for the regular expression ab (a/b)*abb.,8
+Unit-I,D,Write short notes on i. Compiler writing tools ii. Role of Lexical Analyzer,8
+Unit-II,A,Differentiate between top down parsing and bottom up parsing?,4
+Unit-II,B,Consider the following Grammar S → AS|b A →SA|a (i) List all the LR (0) items for the above grammar. (ii) Is the grammar SLR? If so construct the SLR Parsing Table.,8
+Unit-II,C,Is the following grammar LL (1)? Design top down parsing procedures for the below grammar. Trace the moves made by the parser to recognize the string abba. S→ abSa | aaAb | b A→ baAb | b,8
+Unit-II,D,Write the algorithm for operator precedence parsing with suitable example.,8
+Unit-III,A,Write the Translation scheme to produce three- address code for assignment statements,4
+Unit-III,B,"Using the given grammar, write the syntax directed definitions to evaluate an expression. Construct the annotated parse tree for the sentence 2+3*7. E→E+T | T T→T*F | F F→(E) | num",8
+Unit-III,C,Translate the expression - (a+b) * (c+d) + (a+b+c) into i.  Quadruples ii. Triples iii. Indirect Triples iv. Postfix Notations,8
+Unit-III,D,Differentiate between (i) Synthesized Attribute and Inherited Attribute (ii) Syntax directed definition and translation scheme with an example,8
+Unit-IV,A,When call by name is preferred than other parameter passing techniques,4
+Unit-IV,B,What is activation record? Explain different fields in the activation record.,8
+Unit-IV,C,"Explain Stack, Static and Heap allocation strategies.",8
+Unit-IV,D,What is the use of symbol table? Explain different ways to implement symbol table and explain various fields of symbol table.,8
+Unit-V,A,Define the term loop optimization.,4
+Unit-V,B,Explain in brief issues in the design the code generator.,8
+Unit-V,C,Write in detail the steps of code generation algorithm including the function 'getreg' with an example. Generate assembly code for the following 'C' statement x =a / (b+c) – d * (e+f),8
+Unit-V,D,Write a short note on (Any Two) i. Global data flow analysis ii. Peephole optimization. iii. DAG,8
+Unit-I,A,Write any four difference between compiler and interpreter.,4
+Unit-I,B,Construct NFA to DFA by using the Thompson construction for the following regular expression abb(a|b)*,8
+Unit-I,C,Explain the various phases of compiler.,8
+Unit-I,D,Write shorts notes on the following: i. Single pass vs multi pass compilers ii. Bootstrapping,8
+Unit-II,A,Define context free grammar.,4
+Unit-II,B,"Construct predictive parsing table for the following grammar: S → iEtSS₁ | a, S₁ → eS | ε, E → b",8
+Unit-II,C,"Construct an Operator Precedence relations for the E → E + T | T, T → T * F | F, F → (E) | id",8
+Unit-II,D,"Construct the SLR parsing table for the following S → AA,  S → aA,  A → b",8
+Unit-III,A,Explain the role of semantic analyzer with an example.,4
+Unit-III,B,"Represent the following arithmetic expression to Quadruple, Triple and Indirect Triple E = -b * (c + d)",8
+Unit-III,C,Translate the expression a < b and c < d to three address code.,8
+Unit-III,D,Explain   the   S-attributed   and   L-attributed definitions with suitable examples,8
+Unit-IV,A,Define allocation strategies.,4
+Unit-IV,B,Explain different parameter passing methods with examples.,8
+Unit-IV,C,What is the use of activation record? Explain the different fields used in activation record.,8
+Unit-IV,D,What is symbol table? What are the data structures used to implement it?,8
+Unit-V,A,Discuss basic block with an example.,4
+Unit-V,B,Explain various code optimization techniques.,8
+Unit-V,C,Generate the code sequence for assignment a := x - y + x - z + x - z,8
+Unit-V,D,Discuss the major issues of code generation.,8
+Unit-I,A,Differentiate between one pass and multi-pass compiler?,4
+Unit-I,B,Construct minimum state DFA for regular expression (0 + 1) * 00 + 01.,8
+Unit-I,C,What is Lex? Explain with suitable code.,8
+Unit-I,D,Write short notes on : (i) Compiler writing tools (ii) Role of Lexical Analyzer,8
+Unit-II,A,Differentiate between top down and bottom up parser.,4
+Unit-II,B,"Why there is a need to eliminate left recursion in top down parsing, construct predictive parsing table for S → iEtSS1/a S1 → eS/ε E → b",8
+Unit-II,C,Consider the following grammar S → AaAb/BbBa A → ε B → ε Test whether the grammar is LL(1) or not and construct a predictive parsing table for it.,8
+Unit-II,D,"Write an algorithm to obtain the First ( ) and following table, left factoring the given grammar E → E + T/T T → T* F/F F → (E)/id Also find first and follow ( ).",8
+Unit-III,A,Describe Boolean expression and procedure calls.,4
+Unit-III,B,What is role of semantic analyzer? Explain ↓synthesized and inherited attribute with example.,8
+Unit-III,C,What is 3 Address code? Translate the expression (a + b) * (c + d) + (a + b + c) into:(i) Quadruples . (ii) Tripal (iii) Indirect Tripal Representation with brief explanation.,8
+Unit-III,D,Write short noteson: (i) Translation of assignment strategies (ii) Control flow,8
+Unit-IV,A,What is dynamic storage allocation? Explain allocation strategies.,4
+Unit-IV,B,What are different parameter passing method. Explain with example.,8
+Unit-IV,C,What is the use of symbol table describe ways to implement symbol table and write the various fields of symbol table. https://www.csvtuonline.com,8
+Unit-IV,D,Explain about Activation tree.,8
+Unit-V,A,Define the term loop optimization explain any two loop optimization techniques.,4
+Unit-V,B,Explain in brief issues in the design of code generator.,8
+Unit-V,C,Write short notes on :    (i) Global data flow  analysis (ii) Register allocation,8
+Unit-V,D,Discuss the major issues of code generation.,8
+Unit-I,A,"Differentiate between Compiler, Interpreter, Assembler.",4
+Unit-I,B,Explain the different phases of compiler with example.,8
+Unit-I,C,Construct minimum state DFA for regular expression (a+b)*abb,8
+Unit-I,D,Write a short notes on Compiler Construction Tools.,8
+Unit-II,A,"Find first and follow for the following grammar. S → AaBbBa, A → ε, B → ε.",4
+Unit-II,B,Explain the shift reduce parser and its working. Parse the string id * id for the grammar E → E + T|T T → T * F|F F → id.,8
+Unit-II,C,"Compare SLR,CLR and LALR parsers.Why the following grammar not SLR (1) but CLR (1) S → L = R|R L → *R|id R → L.",8
+Unit-II,D,Write a short note on (any two): (i) Left Recursion (ii) Left Factoring (iii) Role of Parser.,8
+Unit-III,A,Differentiate between Synthesized and Inherited attribute  .,4
+Unit-III,B,"Using the given grammar, write the syntax directed definition to evaluate an expression. Construct the annotated parse tree for the sentence 2+3*7 E → E + T|T T → T * F|F F → (E)|num    .",8
+Unit-III,C,"Construct Quadruples, Triples, Indirect Triples for the expression -(a + b) * (c + d) - (a + b + c)  .",8
+Unit-III,D,Write the translation scheme to produce three address code for assignment Statements    .,8
+Unit-IV,A,"Differentiate between Stack, Static and Heap allocation Strategies?",4
+Unit-IV,B,What is activation record? Explain different fields in the activation record.,8
+Unit-IV,C,What is the use of symbol table? Explain different ways to implement symbol table and explain various field of symbol table.,8
+Unit-IV,D,Discuss the various parameter techniques with suitable example.,8
+Unit-V,A,What is Directed Arcyclic Graph (DAG)?,4
+Unit-V,B,Discuss various issues in design of a code generation.,8
+Unit-V,C,Explain the simple code generator algorithm and generate target code sequence for the following statement d := (a-b)+(a-c)+(a-c).,8
+Unit-V,D,Write short notes on : (any two) (i) Global Data Flow Analysis (ii) Loop Optimization (iii) Optimization of basic blocks.,8

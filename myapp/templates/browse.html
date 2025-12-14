@@ -1,0 +1,504 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block start %}
+    <!-- <div class="container">
+      <header class="header">
+        <a href="/" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back
+        </a>
+        <h1 class="page-title">Find Predicted Exam Paper</h1>
+        <p class="page-subtitle">Select your college, semester, and subject</p>
+      </header>
+
+      <main class="main-content">
+       <form method="GET" action="{% url 'result' %}">
+        <div class="form-card">
+      
+            <div class="form-group">
+              <label for="college" class="form-label">College Name</label>
+              <select id="college" name="college" class="form-select" required>
+                <option value="">Select College</option>
+                <option value="bit">BIT</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="semester" class="form-label">Semester</label>
+              <select id="semester" name="semester" class="form-select" required>
+                <option value="">Select Semester</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject</label>
+              <select id="subject" name="subject" class="form-select" required>
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              Get Prediction
+              <svg class="btn-icon-right" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          </form>
+      </main>
+    
+    </div>
+
+    <script>
+     document.getElementById("semester").addEventListener("change", function() {
+    let sem = this.value;
+
+    if (sem === "") {
+        document.getElementById("subject").innerHTML = '<option value="">Select Subject</option>';
+        return;
+    }
+
+    fetch(`/get-subjects/?semester=${sem}`)
+        .then(response => response.json())
+        .then(data => {
+            let subjectDropdown = document.getElementById("subject");
+            subjectDropdown.innerHTML = '<option value="">Select Subject</option>';
+
+            data.forEach(item => {
+                subjectDropdown.innerHTML += `<option value="${item.id}">${item.subject_name}</option>`;
+            });
+        });
+});
+</script> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Materials - Exam Paper Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .top-bar {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .back-button svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.95);
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 60px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group label svg {
+            width: 22px;
+            height: 22px;
+            fill: #2c5282;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.05em;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: #fafafa;
+            color: #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%232c5282' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 24px;
+        }
+
+        .form-control:hover {
+            border-color: #2c5282;
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #2c5282;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(44, 82, 130, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
+            margin-top: 40px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(44, 82, 130, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .decorative-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .circle1 {
+            width: 150px;
+            height: 150px;
+            top: -75px;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle2 {
+            width: 100px;
+            height: 100px;
+            bottom: -50px;
+            left: 5%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .circle3 {
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            right: -40px;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(44, 82, 130, 0.1) 0%, rgba(30, 58, 95, 0.1) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 4px solid #2c5282;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card svg {
+            width: 20px;
+            height: 20px;
+            fill: #2c5282;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 40px 30px;
+            }
+
+            .header {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="/" class="back-button" onclick="goBack()">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            Back
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="decorative-elements">
+                <div class="circle circle1"></div>
+                <div class="circle circle2"></div>
+                <div class="circle circle3"></div>
+            </div>
+            <h1>Find Predicted Exam Paper</h1>
+            <p>Select your college, semester, and subject</p>
+        </div>
+
+        <div class="content">
+            <div class="info-card">
+                <p>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    </svg>
+                    Select your details below to get smart predictions based on historical exam patterns and trends
+                </p>
+            </div>
+
+            <form method="GET" action="{% url 'result' %}">
+                <div class="form-group">
+                    <!-- <label>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+                        </svg>
+                        College Name
+                    </label> -->
+                    <!-- <select class="form-control" required>
+                        <option value="">Select College</option>
+                        <option value="BIT">BIT</option>
+                        <option value="NIT">NIT</option>
+                        <option value="IIT">IIT</option>
+                        <option value="IIIT">IIIT</option>
+                    </select> -->
+                    <label for="college" class="form-label">College Name</label>
+              <select id="college" name="college" class="form-control" required>
+                <option value="">Select College</option>
+                <option value="bit">BIT</option>
+              </select>
+                </div>
+
+                <div class="form-group">
+                    <!-- <label>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                        </svg>
+                        Semester
+                    </label>
+                    <select class="form-control" required>
+                        <option value="">Select Semester</option>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                        <option value="7">Semester 7</option>
+                        <option value="8">Semester 8</option>
+                    </select> -->
+                    <label for="semester" class="form-label">Semester</label>
+              <select id="semester" name="semester" class="form-control" required>
+                <option value="">Select Semester</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+                </div>
+
+                <div class="form-group">
+                    <!-- <label>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+                        </svg>
+                        Subject
+                    </label>
+                    <select class="form-control" required>
+                        <option value="">Select Subject</option>
+                        <option value="compiler">Compiler Design</option>
+                        <option value="os">Operating Systems</option>
+                        <option value="dbms">Database Management</option>
+                        <option value="cn">Computer Networks</option>
+                        <option value="ai">Artificial Intelligence</option>
+                        <option value="ml">Machine Learning</option>
+                    </select> -->
+                    <label for="subject" class="form-label">Subject</label>
+              <select id="subject" name="subject" class="form-control" required>
+                <option value="">Select Subject</option>
+              </select>
+                </div>
+
+                <!-- <button type="submit" class="submit-btn">
+                    Get Prediction
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                    </svg>
+                </button> -->
+                <button type="submit" class="submit-btn">
+              Get Prediction
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                    </svg>
+            </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+     document.getElementById("semester").addEventListener("change", function() {
+    let sem = this.value;
+
+    if (sem === "") {
+        document.getElementById("subject").innerHTML = '<option value="">Select Subject</option>';
+        return;
+    }
+
+    fetch(`/get-subjects/?semester=${sem}`)
+        .then(response => response.json())
+        .then(data => {
+            let subjectDropdown = document.getElementById("subject");
+            subjectDropdown.innerHTML = '<option value="">Select Subject</option>';
+
+            data.forEach(item => {
+                subjectDropdown.innerHTML += `<option value="${item.id}">${item.subject_name}</option>`;
+            });
+        });
+});
+</script>
+</body>
+</html>
+
+
+{% endblock %}
